@@ -1,0 +1,209 @@
+#root header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* height: 56px; */
+}
+#root .body {
+  min-height: calc(100vh - 620px);
+}
+#root footer {
+  height: 620px;
+}
+.carousel-inner {
+  width: 700px;
+  height: 600px;
+}
+#slide-img {
+  width: 700px;
+  height: 600px;
+}
+.navigation {
+  margin-top: 60px;
+  margin-left: 20px;
+}
+.header {
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+}
+.header-item {
+  padding: 20px;
+  /* width: 200px; */
+}
+.fa-solid {
+  font-weight: 700;
+  font-size: 30px;
+}
+.header-icon {
+  display: flex;
+  gap: 20px;
+}
+.main {
+  width: 80%;
+  height: auto;
+  margin: auto;
+  overflow-x: scroll;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(128, 121, 121);
+  border-radius: 10px;
+}
+.main-name {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.main-name-right {
+  display: flex;
+  gap: 10px;
+}
+a {
+  text-decoration: none; /* Loại bỏ dấu gạch chân */
+  color: black; /* Đặt màu chữ thành đen */
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5 cột có kích thước bằng nhau */
+  grid-template-rows: auto; /* Chiều cao tự động theo nội dung */
+  gap: 10px; /* Khoảng cách giữa các ô (có thể điều chỉnh theo nhu cầu) */
+}
+
+.grid-item {
+  background-color: #ece5e5; /* Màu nền để nhận biết ô */
+  padding: 20px; /* Khoảng cách nội dung trong ô (có thể điều chỉnh theo nhu cầu) */
+  text-align: center;
+}
+
+.grid-item img {
+  max-width: 100%; /* Đảm bảo hình ảnh không vượt quá kích thước của ô */
+  height: auto;
+}
+
+.price {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.rating {
+  margin-top: 5px;
+  color: gold;
+}
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.5s ease; /* Thêm hiệu ứng chuyển động cho thuộc tính transform */
+}
+
+.grid-item:hover {
+  transform: scale(1.1); /* Khi hover, làm phóng to hình ảnh */
+  box-shadow: 1px 1px 5px rgb(148, 135, 135);
+}
+.price,
+.rating,
+.product-name,
+.quantity {
+  margin-bottom: 5px;
+}
+
+.quantity-button {
+  background-color: #333;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-button:hover {
+  background-color: #555;
+}
+
+/* CSS cho số lượng */
+.quantity {
+  display: flex;
+  align-items: center;
+}
+
+/* CSS cho số lượng và nút tăng giảm */
+.quantity-button,
+.quantity span {
+  margin: 0 4px;
+}
+
+/* CSS cho giá và đánh giá */
+.price,
+.rating {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* CSS cho tên sản phẩm */
+.product-name {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* CSS cho grid-item */
+.grid-item {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.grid-item:hover {
+  transform: scale(1.1);
+}
+.position-absolute {
+  left: 6px;
+  position: absolute !important;
+}
+.fa-regular,
+.far {
+  font-weight: 400;
+  font-size: 27px;
+  top: 7%;
+  left: 81%;
+  position: absolute !important;
+}
+.quantity-button {
+  background-color: #333;
+  color: white;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* CSS cho nút trái tim */
+#favorite-button {
+  background-color: transparent;
+  color: rgb(228, 11, 11);
+  border: none;
+  cursor: pointer;
+  font-size: 27px;
+  transition: color 0.3s ease; /* Thêm hiệu ứng chuyển động cho màu chữ khi hover */
+}
+
+#favorite-button:hover {
+  color: darkred;
+}
+.text {
+  background-size: cover;
+  min-width: 100vh;
+  min-height: 100vh;
+  position: relative;
+}
+.text-item {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
