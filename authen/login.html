@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="signup.css" />
   </head>
-  <style>
+   <style>
     body {
       margin: 0;
       overflow: hidden;
@@ -39,40 +40,26 @@
       />
     </div>
     <div class="signup-container">
-      <form onsubmit="signup(event)">
-        <h2>Sign Up</h2>
+      <form onsubmit="login(event)">
+        <div>
+          <i class="fa-brands fa-google-plus-g" id="signInWithGoogle" style="font-size: 40px" ></i>
+          <i style="font-size: 40px;" class="fa-brands fa-github"></i>
+          <i style="font-size: 40px;" class="fa-brands fa-facebook"></i>
+        </div>
+        <h2>Logn In</h2>
         <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Username" />
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" placeholder="Email" />
+        <input type="text" id="username" placeholder="Username" required />
 
         <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Password" />
-
-        <label for="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmpassword"
-          z
-          placeholder="Confirm Password"
-        />
-
+        <input type="password" id="password" placeholder="Password" required />
         <div class="button">
-          <div>
-            <button style="width: 100%; font-size: 15px" type="submit">
-              Sign Up
-            </button>
-          </div>
-
-          <div><a href="./login.html">Logn in</a></div>
-          <div>
-            <button style="width: 100%; font-size: 15px">Exit</button>
-          </div>
+         <div><button style="   width: 100%;" type="submit">Logn In</div>
+          <div><button onclick="handleExit()">Exit</button></div>
         </div>
       </form>
     </div>
-    <script src="authen.js"></script>
-    <script src="../main.js"></script>
+    <script  src ="authen.js"></script>
+    <script type="module" src="../firebase.js"></script>
+    <script  src="../main.js"></script>
   </body>
 </html>

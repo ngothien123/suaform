@@ -23,20 +23,22 @@
                 <a class="navbar-brand" href="#"><img src="foodmart/img/logo.png" alt=""></a>
                 </div>    
             </div>
-           
             <div  class="header-item">
-                <ul class="header-icon" style=" list-style-type: none;">
-                  <a href="./authen/lognin.html">Sign In</a>
-                    <a href="./authen/signup.html">Sign Up</a>
-                    <li><a href="#"></a><i class="fa-solid fa-heart"></i></li>
-                    <li><a href="#"> <i class="fa-solid fa-user"></i></a></li>
-                    <li><a href="#"><i class="fa-solid fa-bars"></i></a></li>
+                <ul class="header-icon" id="header-notlogin" style=" list-style-type: none;">
+                 
+                  <a href="./authen/login.html">Sign In</a>
+                  <a href="./authen/signup.html">Sign Up</a>
+                </ul>
+                 <ul class="header-icon" id="header-login" style=" list-style-type: none">
+                   
+                  <li><a href="#"></a><i class="fa-solid fa-heart"></i></li>
+                  <li><a href="#"> <i class="fa-solid fa-user"></i></a></li>
+                  <li><a href="#"><i class="fa-solid fa-bars"></i></a></li>
+                  <button onclick="logout()">Log Out</button>
                 </ul>
             </div>
         </nav>
-           </div>
-       
-        
+           </div>     
     </header>
       <div class="body">
         <div class="navigation">
@@ -216,10 +218,7 @@
         </div> -->
       
        
-</div>
-   
-
-
+</div> 
     </div>
        <footer class="text-center text-lg-start bg-body-tertiary text-muted">
         <!-- Section: Social media -->
@@ -339,6 +338,8 @@
     </footer>
     <!-- Footer -->
               </div>
-    <script src="./main.js"></script>
+              <script src="./authen/authen.js" ></script>
+    <script    src="./main.js"></script>
+    
   </body>
 </html>
