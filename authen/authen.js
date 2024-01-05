@@ -1,24 +1,4 @@
-// HIỂN THỊ CÁC PHẦN TỬ PRODUCT RA GIAO DIỆN
-function renderProducts(array) {
-  const containerEl = document.querySelector(".grid-container");
-  let productHTML = ``;
-  array.forEach((product) => {
-    productHTML += ` <div class="grid-item">
-      <img src="${product.img}" alt="Product 1">
-      <div><p>${product.title}</p></div>
-      <div class="price">$100</div>
-      <div class="rating">⭐⭐⭐⭐</div>
-      <div class="quantity">
-          <button class="quantity-button">-</button>
-          <span>1</span>
-          <button class="quantity-button" onclick=addProduct("${product.id}")>+</button>
-        </div>
-    </div>`;
-  });
-  containerEl.innerHTML = productHTML;
-}
-renderProducts(products);
-// TẠO RA 1 HÀM ĐỂ SUBMIT TRONG FORM
+
 function signup(e) {
   console.log("da vao");
   e.preventDefault();
