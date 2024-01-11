@@ -6,19 +6,32 @@ body {
 }
 
 .signup-container {
-  width: 300px;
+  width: 800px;
+  height: auto;
   margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
+  background-color: #c3eab0d4;
+  padding: 40px;
+  top: 40%;
+  left: 50%;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+
+  transform: translate(-50%, -50%);
+  background-color: #c3eab0d4;
+  font-size: 40px; /* hoặc bất kỳ giá trị nào phù hợp */
+  color: #907878; /* Đặt màu chữ nếu muốn */
+  border-radius: 30px;
+}
+.signup-container input {
+  font-size: 30px;
+  border-radius: 10px;
 }
 
 #signup-form {
   display: flex;
   flex-direction: column;
 }
-
 h2 {
   text-align: center;
   color: #333;
@@ -40,7 +53,9 @@ input {
 }
 
 button[type="submit"] {
-    font-size: 15px;}
+  font-size: 15px;
+  background-color: #797d7ad9;
+}
 .button {
   display: flex;
   justify-content: space-between;

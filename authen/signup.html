@@ -17,29 +17,25 @@
       height: 100%;
       position: relative;
     }
-    .signup-container {
-      width: 500px;
-      height: auto;
-      margin: auto;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #b0dcea;
-      font-size: 20px; /* hoặc bất kỳ giá trị nào phù hợp */
-      color: #907878; /* Đặt màu chữ nếu muốn */
-      border-radius: 30px;
-    }
   </style>
   <body>
     <div class="image">
       <img
         style="width: 100%; height: 100%"
-        src="https://www.semtek.com.vn/wp-content/uploads/2020/03/ky-nang-ban-hang-online-2.jpg"
+        src="../foodmart/img/banner-image-1.jpg"
       />
     </div>
     <div class="signup-container">
-      <form onsubmit="signup(event)">
+      <div>
+        <i
+          id="signInWithGoogle"
+          class="fa-brands fa-google-plus-g"
+          style="font-size: 40px"
+        ></i>
+        <i style="font-size: 40px" class="fa-brands fa-github"></i>
+        <i style="font-size: 40px" class="fa-brands fa-facebook"></i>
+      </div>
+      <form id="signupform">
         <h2>Sign Up</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" placeholder="Username" />
@@ -60,19 +56,24 @@
 
         <div class="button">
           <div>
-            <button style="width: 100%; font-size: 15px" type="submit">
+            <button
+              style="width: 100%; font-size: 25px; border-radius: 10px"
+              type="submit"
+            >
               Sign Up
             </button>
           </div>
 
           <div><a href="./login.html">Logn in</a></div>
           <div>
-            <button style="width: 100%; font-size: 15px">Exit</button>
+            <button style="width: 100%; font-size: 25px; border-radius: 10px">
+              Exit
+            </button>
           </div>
         </div>
       </form>
     </div>
-    <script src="authen.js"></script>
+    <script type="module" src="authen.js"></script>
     <script src="../main.js"></script>
   </body>
 </html>

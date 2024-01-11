@@ -1,19 +1,18 @@
 #root header {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 1000;
   /* height: 56px; */
 }
 #root .body {
   min-height: calc(100vh - 700px);
-
+  overflow: auto;
 }
 #root footer {
   /* position: fixed; */
   bottom: 0;
   /* width: 100%; */
   height: 700px;
-  
 }
 .carousel-inner {
   width: 700px;
@@ -46,15 +45,15 @@
 }
 .main {
   width: 80%;
-  height: auto;
+  height: 100%;
   margin: auto;
-  overflow-x: scroll;
+  overflow: hidden;
 }
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(128, 121, 121);
+  background-color: rgb(171, 173, 172);
   border-radius: 10px;
 }
 .main-name {
@@ -64,8 +63,15 @@
 }
 .main-name-right {
   display: flex;
-  gap: 10px;
+  gap: 30px;
 }
+
+.category:hover {
+  border-bottom: 3px solid rgb(255, 217, 0); /* Đường kẻ vàng dưới dòng chữ */
+
+  transition: 0.1s;
+}
+
 a {
   text-decoration: none; /* Loại bỏ dấu gạch chân */
   color: black; /* Đặt màu chữ thành đen */
@@ -74,17 +80,17 @@ a {
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 cột có kích thước bằng nhau */
   grid-template-rows: auto; /* Chiều cao tự động theo nội dung */
-  gap: 10px; /* Khoảng cách giữa các ô (có thể điều chỉnh theo nhu cầu) */
+  gap: 20px; /* Khoảng cách giữa các ô (có thể điều chỉnh theo nhu cầu) */
 }
 
 .grid-item {
   background-color: #ece5e5; /* Màu nền để nhận biết ô */
-  padding: 20px; /* Khoảng cách nội dung trong ô (có thể điều chỉnh theo nhu cầu) */
+  padding: 30px; /* Khoảng cách nội dung trong ô (có thể điều chỉnh theo nhu cầu) */
   text-align: center;
 }
 
 .grid-item img {
-  max-width: 100%; /* Đảm bảo hình ảnh không vượt quá kích thước của ô */
+  width: 100%; /* Đảm bảo hình ảnh không vượt quá kích thước của ô */
   height: auto;
 }
 
@@ -162,10 +168,6 @@ a {
   padding: 10px;
   transition: transform 0.3s ease;
 }
-
-.grid-item:hover {
-  transform: scale(1.1);
-}
 .position-absolute {
   left: 6px;
   position: absolute !important;
@@ -212,3 +214,169 @@ a {
   height: 100%;
   position: absolute;
 }
+#cartNo {
+  position: relative;
+}
+#quantityValue {
+  position: absolute;
+  font-size: 15px;
+  top: 5px;
+  right: 194px;
+  background-color: red;
+  color: white;
+}
+.quantity {
+  height: 50px;
+}
+.quantity-button {
+  height: auto;
+  background-color: rgb(4, 185, 56); /* Màu nền của nút */
+  color: #fff; /* Màu chữ của nút */
+  padding: 10px 20px; /* Kích thước đệm của nút */
+  font-size: 16px; /* Kích thước chữ */
+  border: none;
+  cursor: pointer; /* Biến con trỏ thành mũi tên khi di chuyển qua nút */
+  border-radius: 10px;
+  transition: color 0.1s;
+}
+
+.quantity-button:hover {
+  background-color: #2980b9; /* Màu nền thay đổi khi di chuột qua nút */
+  opacity: 0.5;
+  color: rgba(255, 255, 255, 0.8);
+  transition: 0.3s;
+}
+.grid-item img {
+  max-width: 100%;
+  height: 250px;
+}
+/* CART */
+.card {
+  border: none;
+  width: 50%;
+  text-align: center;
+  margin: auto;
+}
+.card h2 {
+  margin-bottom: 30px;
+}
+.card table {
+  width: 100%;
+}
+.card table theader tr th:first-child {
+  text-align: left;
+}
+.card table tr td {
+  border-bottom: 2px solid #dddddd;
+}
+.card table theader tr th:last-child {
+  text-align: right;
+}
+/* Định dạng cơ bản cho giỏ hàng */
+#cart-container {
+  height: 96vh;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+
+  background-color: #e1d7d7;
+  border: 1px solid #ccc;
+  padding: 10px;
+  opacity: 0.9;
+  box-shadow: 1 0 10px rgba(0, 0, 0, 0.1);
+  /* max-height: 500px; */
+  overflow-y: auto;
+  display: none; /* Bắt đầu ẩn giỏ hàng */
+}
+
+/* Định dạng cho nút Add to Cart */
+.quantity-button {
+  cursor: pointer;
+}
+#searchInput {
+  padding: 15px; /* Kích thước đệm của ô input */
+  margin-bottom: 15px; /* Khoảng cách từ trên xuống */
+  width: 300px; /* Chiều rộng của ô input */
+  border: 1px solid #ccc; /* Đường biên của ô input */
+  border-radius: 20px; /* Độ cong góc của biên */
+  outline: none; /* Loại bỏ đường viền khi ô input được chọn */
+  font-size: 18px; /* Kích thước chữ */
+}
+
+#searchInput::placeholder {
+  color: #999; /* Màu chữ mô phỏng trong ô input */
+}
+#confirmationTable {
+  max-width: 1000px; /* Đặt giới hạn chiều rộng tối đa của hình ảnh */
+  max-height: 300px; /* Đặt chiều cao tối đa của bảng xác nhận */
+  overflow-y: auto; /* Đặt giới hạn chiều cao tối đa của hình ảnh */
+  width: auto; /* Duy trì tỷ lệ khung hình khi giảm kích thước */
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* z-index: 1000; */
+  display: none; /* Bảng xác nhận sẽ được ẩn ban đầu */
+}
+confirmationTable img {
+  max-width: 100px;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+}
+
+/* Thêm overlay để làm nền đen khi bảng xác nhận xuất hiện */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.5);
+  /* z-index: 999; */
+  display: none; /* Overlay sẽ được ẩn ban đầu */
+}
+
+/* .product {
+  display: inline-block;
+  margin: 20px;
+  text-align: center;
+}
+
+.cart {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.cart-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-items li {
+  margin-bottom: 10px;
+}
+
+@keyframes fly {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.fly {
+  animation: fly 0.8s ease-in-out;
+} */

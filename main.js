@@ -1,138 +1,164 @@
-// import { signInWithGoogle } from "./firebase.js";
+// // HEARDER
+// function renderHeader(data = null) {
+//   return `
+//    <header>
+//         <div class="header">
+//            <div class="header-item">
+//              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+//             <div class="container-fluid">
+//                 <a class="navbar-brand" href="#"><img src="foodmart/img/logo.png" alt=""></a>
+//                 </div>
+//             </div>
+//             <div  class="header-item">
+//                 <ul class="header-icon" id="header-notlogin" style=" list-style-type: none;">
 
-// // HIỂN THỊ CÁC PHẦN TỬ PRODUCT RA GIAO DIỆN
-// function renderProducts(array) {
-//   const containerEl = document.querySelector(".grid-container");
-//   let productHTML = ``;
-//   array.forEach((product) => {
-//     productHTML += ` <div class="grid-item">
-//       <img src="${product.img}" alt="Product 1">
-//       <div><p>${product.title}</p></div>
-//       <div class="price">$100</div>
-//       <div class="rating">⭐⭐⭐⭐</div>
-//       <div class="quantity">
-//           <button class="quantity-button">-</button>
-//           <span>1</span>
-//           <button class="quantity-button" onclick=addProduct("${product.id}")>+</button>
+//                   <a href="./authen/login.html">Sign In</a>
+//                   <a href="./authen/signup.html">Sign Up</a>
+//                 </ul>
+//                  <ul class="header-icon" id="header-login" style=" list-style-type: none">
+
+//                   <li><a href="#"></a><i class="fa-solid fa-heart"></i></li>
+//                   <li><a href="#"> <i class="fa-solid fa-user"></i></a></li>
+//                   <li><a href="#"><i class="fa-solid fa-bars"></i></a></li>
+//                   <button onclick="logout()">Log Out</button>
+//                 </ul>
+//             </div>
+//         </nav>
+//            </div>
+//     </header>
+//   `;
+// }
+// // FOOTER
+// function renderFooter(data = null) {
+//   return `
+//    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+//         <!-- Section: Social media -->
+//         <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+//             <!-- Left -->
+
+//             <!-- Right -->
+//             <div>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-facebook-f"></i>
+//                 </a>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-twitter"></i>
+//                 </a>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-google"></i>
+//                 </a>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-instagram"></i>
+//                 </a>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-linkedin"></i>
+//                 </a>
+//                 <a href="" class="me-4 text-reset">
+//                     <i class="fab fa-github"></i>
+//                 </a>
+//             </div>
+//             <!-- Right -->
+//         </section>
+//         <!-- Section: Social media -->
+
+//         <!-- Section: Links  -->
+//         <section class="">
+//             <div class="container text-center text-md-start mt-5">
+//                 <!-- Grid row -->
+//                 <div class="row mt-3">
+//                     <!-- Grid column -->
+//                     <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+//                         <!-- Content -->
+//                         <h6 class="text-uppercase fw-bold mb-4">
+//                             <i class="fas fa-gem me-3"></i>Company name
+//                         </h6>
+//                         <p>
+//                             Here you can use rows and columns to organize your footer content. Lorem ipsum
+//                             dolor sit amet, consectetur adipisicing elit.
+//                         </p>
+//                     </div>
+//                     <!-- Grid column -->
+
+//                     <!-- Grid column -->
+//                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+//                         <!-- Links -->
+//                         <h6 class="text-uppercase fw-bold mb-4">
+//                             Products
+//                         </h6>
+//                         <p>
+//                             <a href="#!" class="text-reset">Angular</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">React</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">Vue</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">Laravel</a>
+//                         </p>
+//                     </div>
+//                     <!-- Grid column -->
+
+//                     <!-- Grid column -->
+//                     <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+//                         <!-- Links -->
+//                         <h6 class="text-uppercase fw-bold mb-4">
+//                             Useful links
+//                         </h6>
+//                         <p>
+//                             <a href="#!" class="text-reset">Pricing</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">Settings</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">Orders</a>
+//                         </p>
+//                         <p>
+//                             <a href="#!" class="text-reset">Help</a>
+//                         </p>
+//                     </div>
+//                     <!-- Grid column -->
+
+//                     <!-- Grid column -->
+//                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+//                         <!-- Links -->
+//                         <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+//                         <p><i class="fas fa-home me-3"></i> New York, NY 10012, US</p>
+//                         <p>
+//                             <i class="fas fa-envelope me-3"></i>
+//                             info@example.com
+//                         </p>
+//                         <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
+//                         <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+//                     </div>
+//                     <!-- Grid column -->
+//                 </div>
+//                 <!-- Grid row -->
+//             </div>
+//         </section>
+//         <!-- Section: Links  -->
+
+//         <!-- Copyright -->
+//         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+//             © 2021 Copyright:
+//             <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
 //         </div>
-//     </div>`;
-//   });
-//   containerEl.innerHTML = productHTML;
+//         <!-- Copyright -->
+//     </footer>
+//   `;
 // }
-// renderProducts(products);
-// // TẠO RA 1 HÀM ĐỂ SUBMIT TRONG FORM
-// function signup(e) {
-//   e.preventDefault();
-//   const username = document.getElementById("username").value;
-//   const email = document.getElementById("email").value;
-//   const password = document.getElementById("password").value;
-//   const confirmpassword = document.getElementById("confirmpassword").value;
-//   //   TẠO 1 MẢNG ĐỂ CÓ THỂ LƯU NHIỀU USER VÀO LOCAL
-//   let users = JSON.parse(localStorage.getItem("users") || "[]");
-//   if (username != "") {
-//     if (username.length < 8) {
-//       alert("Tên đăng nhập phải có trên 8 kí tự !!");
-//       username.focus();
-//       return;
-//     }
-//   } else {
-//     alert("Nhập tên đăng nhập !!");
-//     username.focus();
-//     return;
-//   }
-
-//   if (password != "") {
-//     if (password.length < 8) {
-//       alert("Mật khẩu phải có trên 8 kí tự !!");
-//       password.focus();
-//       return;
-//     }
-//   } else {
-//     alert("Nhập mật khẩu đăng nhập");
-//     password.focus();
-//     return;
-//   }
-
-//   if (confirmpassword != "") {
-//     if (confirmpassword != password) {
-//       alert("Mật khẩu không trùng nhau !!");
-//       return;
-//     }
-//   } else {
-//     alert("Nhập lại mật khẩu");
-//     confirmpassword.focus();
-//     return;
-//   }
-//   const user = {
-//     username: username,
-//     email: email,
-//     password,
-//   };
-//   users = [...users, user];
-//   var json = JSON.stringify(users);
-//   localStorage.setItem("users", json);
-//   alert("Đăng kí thành công ");
-//   window.location.href = "http://127.0.0.1:5501/authen/login.html";
-// }
-// // TẠO 1 FUNCTION ĐỂ SO SÁNH LOCAR Ở SIGN UP VÀ LOGIN
-// function login(event) {
-//   event.preventDefault();
-//   const username = document.getElementById("username").value;
-
-//   const password = document.getElementById("password").value;
-//   const users = JSON.parse(localStorage.getItem("users"));
-//   const matchedUser = users.find((user) => user.username == username);
-//   console.log(matchedUser);
-
-//   //Khong tim thay user co cung usernam trong csdl
-//   if (!matchedUser) {
-//     alert("Username không tồn tại");
-//     return;
-//   }
-//   //Nếu có tồn tại thì sẽ kiểm tra password có trùng không
-//   if (password == matchedUser.password) {
-//     alert("Đăng nhập thành công");
-//     // lưu vô csdl rằng đã đăng nhập
-//     localStorage.setItem("currentUser", JSON.stringify(matchedUser));
-
-//     location.assign("http://127.0.0.1:5501/index.html");
-//   } else {
-//     alert("mật khẩu không đúng");
-//   }
-// }
-// //Kiểm tra người dùng hiện tại có đăng nhập không
-// function checkLogin() {
-//   const headerNotLogin = document.querySelector("#header-notlogin");
-//   const headerLogin = document.querySelector("#header-login");
-//   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-//   if (currentUser) {
-//     headerNotLogin.style.display = "none";
-//     headerLogin.style.display = "flex";
-//     return true;
-//   } else {
-//     headerNotLogin.style.display = "flex";
-//     headerLogin.style.display = "none";
-//     return false;
-//   }
-// }
-// checkLogin();
-// function logout() {
-//   localStorage.removeItem("currentUser");
-//   window.location.reload();
-// }
-
 // TẠO TOKEN
 function createToken(data) {
-  let dataJsonStr = JSON.stringify({
-    data,
-    privateKey: "NTBPhuoc",
-  });
+  let dataJsonstr = JSON.stringify({ data, privatekey: "thien" });
   let hashStr = ``;
-  for (let i in dataJsonStr) {
-    hashStr += dataJsonStr[i].charCodeAt(0) * 2 + "|";
+  for (let i in dataJsonstr) {
+    hashStr += dataJsonstr[i].charCodeAt(0) * 2 + "|";
   }
   return hashStr;
 }
+
 function decodeToken(token) {
   let baseStr = ``;
   for (let i in token.split("|")) {
@@ -154,27 +180,24 @@ function hash(str) {
   }
   return hashStr * 2 + "yamieu";
 }
-document
-  .getElementById("signInWithGoogle")
-  .addEventListener("click", async () => {
-    // lấy dữ liệu từ google
-    let result = await signInWithGoogle();
-    let users = JSON.parse(localStorage.getItem("users") || "[]");
-    let checkUser = users.find((user) => user.email === result.user.email);
-    if (checkUser) {
-      let user = users.find((item) => item.email == result.user.email);
-      let token = createToken(user);
-      localStorage.setItem("token", token);
-      window.location.href = "/";
-    } else {
-      let newUser = {
-        id: Math.ceil(Date.now() * Math.random()),
-        userName: Math.ceil(Date.now() * Math.random()),
-        email: result.user.email,
-        password: hash(Math.ceil(Date.now() * Math.random())),
-        avatar: result.user.photoURL,
-      };
-    }
-    // localStorage.setItem("products", JSON.stringity(products));
-    window.location.href = "http://127.0.0.1:5501/authen/login.html";
-  });
+
+//Kiểm tra người dùng hiện tại có đăng nhập không
+function checkLogin() {
+  const headerNotLogin = document.querySelector("#header-notlogin");
+  const headerLogin = document.querySelector("#header-login");
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (currentUser) {
+    headerNotLogin.style.display = "none";
+    headerLogin.style.display = "flex";
+    return true;
+  } else {
+    headerNotLogin.style.display = "flex";
+    headerLogin.style.display = "none";
+    return false;
+  }
+}
+
+function logout() {
+  localStorage.removeItem("currentUser");
+  window.location.reload();
+}

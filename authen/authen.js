@@ -1,6 +1,38 @@
+import { signInWithGoogle } from "../firebase.js";
+document
+  .getElementById("signInWithGoogle")
+  .addEventListener("click", async () => {
+    try {
+      let result = await signInWithGoogle();
+      let users = JSON.parse(localStorage.getItem("users") || "[]");
+      let checkUser = users.find((user) => user.email == result.user.email);
+      if (checkUser) {
+        // login
+        let user = users.find((item) => item.email == result.user.email);
+        let token = createToken(user);
+        localStorage.setItem("token", token);
+        window.location.href = "/";
+      } else {
+        // register + login
+        let newUser = {
+          id: Math.ceil(Date.now() * Math.random()),
+          userName: Math.ceil(Date.now() * Math.random()),
+          email: result.user.email,
+          password: hash(Math.ceil(Date.now() * Math.random())),
+          avatar: result.user.photoURL,
+          cart: [],
+        };
+        localStorage.setItem("users", JSON.stringify([...users, newUser]));
+        let token = createToken(newUser);
+        localStorage.setItem("token", token);
+        window.location.href = "/";
+      }
+    } catch (err) {
+      console.log("err", err);
+    }
+  });
 
-function signup(e) {
-  console.log("da vao");
+export function signup(e) {
   e.preventDefault();
   const username = document.getElementById("username").value;
   const email = document.getElementById("email").value;
@@ -45,22 +77,27 @@ function signup(e) {
     username: username,
     email: email,
     password,
+    cart: [],
   };
+
   users = [...users, user];
   var json = JSON.stringify(users);
   localStorage.setItem("users", json);
   alert("Đăng kí thành công ");
   window.location.href = "http://127.0.0.1:5501/authen/login.html";
 }
+const sigupform = document.getElementById("signupform");
+if (sigupform) {
+  sigupform.addEventListener("submit", (event) => signup(event));
+}
 // TẠO 1 FUNCTION ĐỂ SO SÁNH LOCAR Ở SIGN UP VÀ LOGIN
-function login(event) {
+export function login(event) {
   event.preventDefault();
   const username = document.getElementById("username").value;
   const password = document.getElementById("password").value;
   const users = JSON.parse(localStorage.getItem("users"));
   const matchedUser = users.find((user) => user.username == username);
   console.log(matchedUser);
-
   //Khong tim thay user co cung usernam trong csdl
   if (!matchedUser) {
     alert("Username không tồn tại");
@@ -69,31 +106,15 @@ function login(event) {
   //Nếu có tồn tại thì sẽ kiểm tra password có trùng không
   if (password == matchedUser.password) {
     alert("Đăng nhập thành công");
+    let token = createToken(matchedUser);
     // lưu vô csdl rằng đã đăng nhập
-    localStorage.setItem("currentUser", JSON.stringify(matchedUser));
-
-    location.assign("http://127.0.0.1:5501/index.html");
+    localStorage.setItem("currentUser", JSON.stringify(token));
+    location.assign("../index.html");
   } else {
     alert("mật khẩu không đúng");
   }
 }
-//Kiểm tra người dùng hiện tại có đăng nhập không
-function checkLogin() {
-  const headerNotLogin = document.querySelector("#header-notlogin");
-  const headerLogin = document.querySelector("#header-login");
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  if (currentUser) {
-    headerNotLogin.style.display = "none";
-    headerLogin.style.display = "flex";
-    return true;
-  } else {
-    headerNotLogin.style.display = "flex";
-    headerLogin.style.display = "none";
-    return false;
-  }
-}
-checkLogin();
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.reload();
+const loginForm = document.getElementById("login-form");
+if (loginForm) {
+  loginForm.addEventListener("submit", (event) => login(event));
 }
