@@ -5,15 +5,31 @@
   /* height: 56px; */
 }
 #root .body {
-  min-height: calc(100vh - 700px);
-  overflow: auto;
+  width: 100%;
+  overflow: hidden;
+
+  /* Thêm thuộc tính overflow:auto để quản lý tràn nội dung */
 }
+
 #root footer {
-  /* position: fixed; */
   bottom: 0;
-  /* width: 100%; */
-  height: 700px;
+  height: 300px;
+  position: relative;
+  clear: both; /* Thêm clear:both để xóa cả float và overflow */
 }
+
+.fa-sharp fa-solid fa-cart-shopping {
+  position: relative;
+}
+.cart-count {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  font-weight: bold;
+  left: 88%;
+  top: 0px;
+}
+
 .carousel-inner {
   width: 700px;
   height: 600px;
@@ -77,6 +93,7 @@ a {
   color: black; /* Đặt màu chữ thành đen */
 }
 .grid-container {
+  width: auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr); /* 5 cột có kích thước bằng nhau */
   grid-template-rows: auto; /* Chiều cao tự động theo nội dung */
@@ -211,7 +228,7 @@ a {
 }
 .text-item {
   width: 100%;
-  height: 100%;
+
   position: absolute;
 }
 #cartNo {
@@ -278,15 +295,61 @@ a {
   position: fixed;
   top: 20px;
   right: 20px;
-
+  width: 600px;
   background-color: #e1d7d7;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 20px;
   opacity: 0.9;
-  box-shadow: 1 0 10px rgba(0, 0, 0, 0.1);
-  /* max-height: 500px; */
-  overflow-y: auto;
-  display: none; /* Bắt đầu ẩn giỏ hàng */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  display: none;
+  z-index: 1000; /* Đặt z-index để đảm bảo nó hiển thị trên các phần khác (ví dụ: overlay) */
+}
+
+#cart-container h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#cart-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#cart-container th,
+#cart-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+#cart-container th {
+  background-color: #f2f2f2;
+}
+
+#cart-container img {
+  max-width: 50px;
+  max-height: 50px;
+  margin-right: 10px;
+}
+
+#cart-container button {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+#cart-container button:hover {
+  background-color: #45a049;
+}
+
+#cart-container button:focus {
+  outline: none;
 }
 
 /* Định dạng cho nút Add to Cart */
@@ -307,10 +370,10 @@ a {
   color: #999; /* Màu chữ mô phỏng trong ô input */
 }
 #confirmationTable {
-  max-width: 1000px; /* Đặt giới hạn chiều rộng tối đa của hình ảnh */
-  max-height: 300px; /* Đặt chiều cao tối đa của bảng xác nhận */
-  overflow-y: auto; /* Đặt giới hạn chiều cao tối đa của hình ảnh */
-  width: auto; /* Duy trì tỷ lệ khung hình khi giảm kích thước */
+  max-width: 1000px;
+  max-height: 300px;
+
+  width: auto;
   height: auto;
   position: absolute;
   top: 50%;
@@ -320,9 +383,38 @@ a {
   padding: 20px;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* z-index: 1000; */
-  display: none; /* Bảng xác nhận sẽ được ẩn ban đầu */
+  display: none;
+  /*Thêm các thuộc tính sau để làm cho nó trở thành một trung tâm và hiển thị một cách trơn tru */
+  text-align: center;
+  line-height: 1.6;
+  font-size: 16px;
 }
+
+#confirmationTable th,
+#confirmationTable td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+#confirmationTable button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#confirmationTable button:hover {
+  background-color: #45a049;
+}
+
+#confirmationTable button:focus {
+  outline: none;
+}
+
 confirmationTable img {
   max-width: 100px;
   max-height: 100px;
@@ -341,42 +433,3 @@ confirmationTable img {
   /* z-index: 999; */
   display: none; /* Overlay sẽ được ẩn ban đầu */
 }
-
-/* .product {
-  display: inline-block;
-  margin: 20px;
-  text-align: center;
-}
-
-.cart {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
-}
-
-.cart-items {
-  list-style-type: none;
-  padding: 0;
-}
-
-.cart-items li {
-  margin-bottom: 10px;
-}
-
-@keyframes fly {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
-
-.fly {
-  animation: fly 0.8s ease-in-out;
-} */

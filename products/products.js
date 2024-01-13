@@ -16,9 +16,12 @@ function renderHeader(data = null) {
                   <a href="./authen/signup.html">Sign Up</a>
                 </ul>
                  <ul class="header-icon" id="header-login" style=" list-style-type: none">
-                   
+                   <div class="cart">
+     
+     
+    </div>
                   <li><i id="cartNo"  class="fa-sharp fa-solid fa-cart-shopping" onclick="toggleCart()"></i></li>
-                  <p id="quantityVađẻlue"></p>
+                   <ul class="cart-items"></ul>
                   <li><a href="#"> <i class="fa-solid fa-user"></i></a></li>
                   <li><a href="#"><i class="fa-solid fa-bars"></i></a></li>
                   <button onclick="logout()">Log Out</button>
@@ -263,18 +266,23 @@ function renderProducts(array) {
   let productHTML = ``;
   array.forEach((product) => {
     productHTML += ` <div class="grid-item ${product.category}">
-        <img src="${product.img}" alt="#">
-        <div><p>${product.title}</p></div>
-        <div class="price"><span>${product.price}</span><sup>đ</sup></div>
-        <div class="rating">⭐⭐⭐⭐</div>
-        <div class="quantity">
-          <span></span>
-          <button class="quantity-button" onclick="addToCart('${product.id}','${product.title}','${product.price}','${product.img}')">ADD CART</button>
-        </div>
-      </div>`;
+      
+          <img  src="${product.img}" alt="#">
+          <div><p>${product.title}</p></div>
+          <div class="price"><span>${product.price}</span><sup>đ</sup></div>
+          <div class="rating">⭐⭐⭐⭐</div>
+          <button class="add-to-cart">FLY</button>
+          <div class="quantity">
+            <span></span>
+            <button  class="quantity-button" onclick="addToCart('${product.id}','${product.title}','${product.price}','${product.img}')">ADD CART</button>
+          </div>
+          <div class="product">
+      </div>
+        </div>`;
   });
   containerEl.innerHTML = productHTML;
 }
+
 function filterProducts(category) {
   const items = document.querySelectorAll(".grid-item");
 
@@ -308,7 +316,7 @@ function renderCart() {
   const usersCSDL = JSON.parse(localStorage.getItem("users"));
 
   const userCSDL = usersCSDL.find(
-    (user) => user.username == decodedCurrentUser.data.username
+    (user) => user.username === decodedCurrentUser.data.username
   );
   const cartTable = document.querySelector("tbody");
   let cartproduct = ``;
@@ -323,23 +331,20 @@ function renderCart() {
         </td>
         <td>
           <button onclick="removeProductInCart('${product.productId}')" type="button">Xoá</button>
-         
+      
         </td>
       </tr>
     `;
   });
   cartTable.innerHTML = cartproduct;
 }
-
 function confirmOrder() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const decodedCurrentUser = decodeToken(currentUser);
   const usersCSDL = JSON.parse(localStorage.getItem("users"));
-
   const userCSDL = usersCSDL.find(
     (user) => user.username == decodedCurrentUser.data.username
   );
-
   // Tìm bảng giỏ hàng và bảng xác nhận
   const cartTable = document.querySelector("tbody");
   const confirmationTable = document.querySelector("#confirmationTable");
@@ -351,16 +356,14 @@ function confirmOrder() {
       <th>Giá</th>
       <th>Số lượng</th>
       <th>Tổng tiền</th>
-    </tr>
+    </tr> 
   `;
   // Tính tổng tiền trong giỏ hàng
   let totalAmount = 0;
-
   // Lặp qua mỗi sản phẩm trong giỏ hàng
   userCSDL.cart.forEach((product) => {
     const totalPrice = product.price * product.quantity;
     totalAmount += totalPrice;
-
     // Thêm thông tin sản phẩm vào bảng xác nhận
     confirmationHTML += `
       <tr>
@@ -371,9 +374,10 @@ function confirmOrder() {
         <td>${product.quantity}</td>
         <td>${totalPrice}<sup>đ</sup></td>
       </tr>
-      <button onclick="closeConfirmCart">Đóng</button>
+      <button onclick="closeConfirmCart()">Đóng</button>
     `;
   });
+
   // Hiển thị tổng tiền
   confirmationHTML += `
     <tr>
@@ -381,6 +385,7 @@ function confirmOrder() {
       <td><strong>${totalAmount}<sup>đ</sup></strong></td>
     </tr>
   `;
+  renderTotal(totalAmount);
   userCSDL.cart = [];
   localStorage.setItem("users", JSON.stringify(usersCSDL));
   // Hiển thị bảng xác nhận và ẩn giỏ hàng
@@ -389,7 +394,34 @@ function confirmOrder() {
   confirmationTable.style.display = "block";
   overlay.style.display = "block";
 }
-function closeConfirmCart() {}
+
+function closeConfirmCart() {
+  // Ẩn bảng xác nhận và overlay
+  const confirmationTable = document.querySelector("#confirmationTable");
+  const overlay = document.querySelector(".overlay");
+  const cartTable = document.querySelector("tbody");
+
+  confirmationTable.style.display = "none";
+  overlay.style.display = "none";
+  cartTable.style.display = "block"; // Hiển thị lại giỏ hàng
+  // Cập nhật lại giỏ hàng và tổng tiền
+  renderCart();
+  // Lấy thông tin user và cập nhật lại tổng tiền
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const decodedCurrentUser = decodeToken(currentUser);
+  const usersCSDL = JSON.parse(localStorage.getItem("users"));
+  const userCSDL = usersCSDL.find(
+    (user) => user.username == decodedCurrentUser.data.username
+  );
+  renderTotal(userCSDL.total);
+}
+
+// Thêm sự kiện click cho nút đóng trong phần xác nhận giỏ hàng
+const closeButton = document.getElementById("closeButton"); // Thêm ID cho nút đóng trong HTML
+if (closeButton) {
+  closeButton.addEventListener("click", closeConfirmCart);
+}
+
 // SEARCH PRODUCT
 function handleSearch() {
   const searchInput = document.getElementById("searchInput");
@@ -438,12 +470,10 @@ function removeProductInCart(productId) {
     alert("Không tìm thấy sản phẩm trong giỏ hàng");
   }
 }
-
 function showCart() {
   const cartContainer = document.getElementById("cart-container");
   cartContainer.style.display = "block";
 }
-
 function hideCart() {
   const cartContainer = document.getElementById("cart-container");
   cartContainer.style.display = "none";
@@ -455,40 +485,53 @@ function addToCart(productId, title, price, img) {
   }
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
   const decodedCurrentUser = decodeToken(currentUser);
-  const usersCSDL = JSON.parse(localStorage.getItem("users"));
-
-  const userCSDL = usersCSDL.find(
+  let usersCSDL = JSON.parse(localStorage.getItem("users"));
+  // Kiểm tra nếu usersCSDL không phải là mảng hoặc không tồn tại
+  if (!Array.isArray(usersCSDL) || !usersCSDL) {
+    console.error("Invalid usersCSDL");
+    usersCSDL = [];
+  }
+  const userIndex = usersCSDL.findIndex(
     (user) => user.username == decodedCurrentUser.data.username
   );
 
-  const checkProduct = userCSDL.cart.find(
+  // Nếu không tìm thấy user, thêm mới một user
+  if (userIndex === -1) {
+    const newUser = {
+      username: decodedCurrentUser.data.username,
+      cart: [],
+      total: 0,
+    };
+    usersCSDL.push(newUser);
+  }
+
+  const user = usersCSDL.find(
+    (user) => user.username == decodedCurrentUser.data.username
+  );
+
+  // Thêm sản phẩm vào giỏ hàng của user
+  const checkProduct = user.cart.find(
     (product) => product.productId === productId
   );
 
   if (checkProduct) {
     checkProduct.quantity += 1;
   } else {
-    userCSDL.cart.push({ productId, price, title, quantity: 1, img });
+    user.cart.push({ productId, price, title, quantity: 1, img });
   }
-  userCSDL.total = (userCSDL.total || 0) + parseInt(price);
 
+  user.total += parseInt(price);
   localStorage.setItem("users", JSON.stringify(usersCSDL));
-
   alert("Thêm giỏ hàng thành công");
-
   renderCart();
-  // Hiển thị tổng tiền trong giao diện
-  renderTotal(userCSDL.total);
-  const cartCountElement = document.getElementById("cartNo");
+  renderTotal(user.total);
 }
-
 function renderTotal(total) {
   const totalElement = document.getElementById("total");
   if (totalElement) {
     totalElement.textContent = ` ${total}.000 `;
   }
 }
-
 // Thêm sự kiện click cho icon giỏ hàng
 function toggleCart() {
   const cartContainer = document.getElementById("cart-container");
@@ -509,3 +552,40 @@ document
   .insertAdjacentHTML("beforebegin", renderHeader());
 document.getElementById("root").insertAdjacentHTML("afterend", renderFooter());
 checkLogin();
+
+// ------------------
+document.querySelectorAll(".add-to-cart").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    // Create a copy of the item image
+    let item = event.target.parentElement;
+    let image = item.querySelector("img");
+    let copy = image.cloneNode(true);
+    copy.style.position = "fixed";
+    copy.style.top = `${image.getBoundingClientRect().top}px`;
+    copy.style.left = `${image.getBoundingClientRect().left}px`;
+    copy.style.transition = "all 0.5s ease-in-out";
+    document.body.appendChild(copy);
+
+    // Get the position of the cart
+    let cart = document.querySelector(".cart");
+    let cartRect = cart.getBoundingClientRect();
+
+    // Animate the copy to the cart
+    copy.style.transform = `translate(${
+      cartRect.left - image.getBoundingClientRect().left
+    }px, ${cartRect.top - image.getBoundingClientRect().top}px) scale(0.1)`;
+
+    // After the animation, remove the copy and increase the cart count
+    copy.addEventListener("transitionend", () => {
+      document.body.removeChild(copy);
+      let count = cart.querySelector(".cart-count");
+      if (!count) {
+        count = document.createElement("span");
+        count.className = "cart-count";
+        count.textContent = "0";
+        cart.appendChild(count);
+      }
+      count.textContent = parseInt(count.textContent) + 1;
+    });
+  });
+});
