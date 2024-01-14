@@ -97,7 +97,7 @@ export function login(event) {
   const password = document.getElementById("password").value;
   const users = JSON.parse(localStorage.getItem("users"));
   const matchedUser = users.find((user) => user.username == username);
-  console.log(matchedUser);
+
   //Khong tim thay user co cung usernam trong csdl
   if (!matchedUser) {
     alert("Username không tồn tại");
@@ -108,7 +108,7 @@ export function login(event) {
     alert("Đăng nhập thành công");
     let token = createToken(matchedUser);
     // lưu vô csdl rằng đã đăng nhập
-    localStorage.setItem("currentUser", JSON.stringify(token));
+    localStorage.setItem("currentUser", token);
     location.assign("../index.html");
   } else {
     alert("mật khẩu không đúng");

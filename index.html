@@ -1,86 +1,70 @@
-  <!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      />
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-        crossorigin="anonymous"
-      />
-      <style>
-        .hidden {
-          display: none;
-        }
-        /* FLY PRODUCT */
-        .grid-item{
-  display: inline-block;
-        margin: 20px;
-        text-align: center;
-        }
-      </style>
-      <link rel="stylesheet" href="main.css" />
-    </head>
-    <body>
-      <div id="root">
-        <div class="body">
-          <section class="text">
-            <div class="text-item">
-              <img
-                style="width: 100%; object-fit: cover"
-                src="foodmart/img/background-pattern.jpg"
-                alt="img"
-              />
-            </div>
-            <div class="text-item">
-              <div class="main">
-                <div class="main-name">
-                  <div class="main-name-left"><h2>Trending Products</h2></div>
-                  <div class="main-name-right">
-                    <!-- Thêm phần tử input này tại vị trí bạn muốn thanh tìm kiếm hiển thị -->
-  <input type="text" id="searchInput" placeholder="Seach Product" oninput="handleSearch()">
+<!DOCTYPE html>
+<html lang="en">
 
-                    <div
-                      id="all"
-                      onclick="filterProducts('all')"
-                      class="category main-name-right-item"
-                    >
-                      <h5>ALL</h5>
-                    </div>
-                    <div
-                      id="fruits"
-                      onclick="filterProducts('fruits')"
-                      class="category main-name-right-item"
-                    >
-                      <h5>FRUITS & VEGES</h5>
-                    </div>
-                    <div
-                      id="juices"
-                      onclick="filterProducts('other')"
-                      class="category main-name-right-item"
-                    >
-                      <h5>OTHER</h5>
-                    </div>
-                  </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <style>
+    .hidden {
+      display: none;
+    }
+
+    /* FLY PRODUCT */
+    .grid-item {
+      display: inline-block;
+      margin: 20px;
+      text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="main.css" />
+</head>
+
+<body>
+  <div id="root">
+    <div class="body">
+      <section class="text">
+        <div class="text-item">
+          <img style="width: 100%; object-fit: cover" src="foodmart/img/background-pattern.jpg" alt="img" />
+        </div>
+        <div class="text-item">
+          <div class="main">
+            <div class="main-name">
+              <div class="main-name-left">
+                <h2>Trending Products</h2>
+              </div>
+              <div class="main-name-right">
+                <!-- Thêm phần tử input này tại vị trí bạn muốn thanh tìm kiếm hiển thị -->
+                <input type="text" id="searchInput" placeholder="Seach Product" oninput="handleSearch()">
+
+                <div id="all" onclick="filterProducts('all')" class="category main-name-right-item">
+                  <h5>ALL</h5>
                 </div>
-
-                <div class="grid-container"></div>
+                <div id="fruits" onclick="filterProducts('fruits')" class="category main-name-right-item">
+                  <h5>FRUITS & VEGES</h5>
+                </div>
+                <div id="juices" onclick="filterProducts('other')" class="category main-name-right-item">
+                  <h5>OTHER</h5>
+                </div>
               </div>
             </div>
-          </section>
-          <!--_______________CART________________ -->
-  <div id="cart-container" class="hidden">
-    <h2>Shopping Cart</h2>
-    <table>
-      <!-- Nội dung giỏ hàng -->
-      <section class="card">
-            <div><h2 style="text-align: center">Card</h2></div>
+
+            <div class="grid-container"></div>
+          </div>
+        </div>
+      </section>
+      <!--_______________CART________________ -->
+      <div id="cart-container" class="hidden">
+        <h2>Shopping Cart</h2>
+        <table>
+          <!-- Nội dung giỏ hàng -->
+          <section class="card">
+            <div>
+              <h2 style="text-align: center">Card</h2>
+            </div>
             <form>
               <table>
                 <thead>
@@ -93,41 +77,35 @@
                 </thead>
                 <tbody>
                 </tbody>
-            
+
               </table>
             </form>
-            <div
-              style="text-align: right; font-size: 20px; margin-top: 20px"
-              class="price-total"
-            >
-            <button type="button" onclick="confirmOrder()">Xác nhận đơn hàng</button>
-            <button onclick="hideCart()">Đóng</button>
-              <p  style="font-weight: bold">
+            <div style="text-align: right; font-size: 20px; margin-top: 20px" class="price-total">
+              <button type="button" onclick="confirmOrder()">Xác nhận đơn hàng</button>
+              <button onclick="hideCart()">Đóng</button>
+              <p style="font-weight: bold">
                 Tổng tiền :<span id="total"></span><sup>đ</sup>
               </p>
             </div>
-          
+
           </section>
           <div>
           </div>
-  </div>
-  <table id="confirmationTable" class="confirmation-table">
-  </table>
-    </table>
-
-          <!--_______________CART_______________ -->
-        </div>
-      
       </div>
-      <script src="./main.js"></script>
-      <script src="./products/products.js"></script>
-      <!-- Messenger Plugin chat Code -->
-      <div id="fb-root"></div>
+      <table id="confirmationTable" class="confirmation-table">
+      </table>
+      </table>
 
-      <!-- Your Plugin chat code -->
-      <div id="fb-customer-chat" class="fb-customerchat"></div>
+      <!--_______________CART_______________ -->
+    </div>
 
-  
-    </body>
-   
-  </html>
+  </div>
+  <script src="./main.js"></script>
+  <script src="./products/products.js"></script>
+  <!-- Messenger Plugin chat Code -->
+  <div id="fb-root"></div>
+
+  <!-- Your Plugin chat code -->
+  <div id="fb-customer-chat" class="fb-customerchat"></div>
+</body>
+</html>
